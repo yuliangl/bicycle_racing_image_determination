@@ -1,0 +1,1 @@
+# bicycle_racing_image_determination
