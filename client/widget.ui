@@ -45,7 +45,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>画像場所：</string>
+          <string>コマンド：</string>
          </property>
         </widget>
        </item>
@@ -65,7 +65,7 @@
        <item>
         <widget class="QPushButton" name="sendBut">
          <property name="text">
-          <string>send</string>
+          <string>送信</string>
          </property>
         </widget>
        </item>
@@ -219,14 +219,14 @@
          <item row="0" column="2">
           <widget class="QPushButton" name="connectBut">
            <property name="text">
-            <string>connect</string>
+            <string>接続</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="discoonectBut">
            <property name="text">
-            <string>discoonect</string>
+            <string>切れる</string>
            </property>
           </widget>
          </item>
