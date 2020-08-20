@@ -5,6 +5,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 
+//QByteArray data1("data");
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -72,11 +73,7 @@ void Widget::outError(QAbstractSocket::SocketError error){
 void Widget::on_ReadyRead()
 {
     QByteArray array = tcpSocket->readAll();
-    int i = 0;
-    while (array[i] != '\0') {
-        i++;
-    }
-    qDebug()<< "i: " << i ;
+    qDebug()<< "array: " << array;
 
 //    ui->label_img->setText(QString(array));
 }
