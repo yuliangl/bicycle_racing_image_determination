@@ -10,6 +10,7 @@ class myLabel : public QLabel
 public:
     explicit myLabel(QWidget *parent );
     virtual void paintEvent(QPaintEvent *event) override;
+    void getPositionPredict();
 
 private:
     int pos[8][4];

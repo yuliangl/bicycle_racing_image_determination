@@ -1,8 +1,9 @@
 #include <QPainter>
 #include <QDebug>
+#include <regex>
 #include "mylabel.h"
 
-//extern QByteArray data1;
+extern QByteArray readData;
 //int position[32] = {0, 301, 126, 387,
 //                    1235, 299, 1413, 387,
 //                    1090, 459, 1261, 531,
@@ -47,6 +48,7 @@ void myLabel::paintEvent(QPaintEvent *event){
     pen.setColor(lineColor);
 //    pen.setWidth(lineSize);
     painter.setPen(pen);
+    getPositionPredict();
 //    painter.drawRect(QRect(startPoint.x(), startPoint.y(),
 //                           endPoint.x()-startPoint.x(), endPoint.y()-startPoint.y()));
     painter.drawRect(QRectF(pos[0][0], pos[0][1], pos[0][2], pos[0][3]));
@@ -57,5 +59,24 @@ void myLabel::paintEvent(QPaintEvent *event){
     painter.drawRect(QRectF(pos[5][0], pos[5][1], pos[5][2], pos[5][3]));
     painter.drawRect(QRectF(pos[6][0], pos[6][1], pos[6][2], pos[6][3]));
     painter.drawRect(QRectF(pos[7][0], pos[7][1], pos[7][2], pos[7][3]));
+
+}
+void myLabel::getPositionPredict(){
+    QString data(readData);
+    data.remove(QChar('<'), Qt::CaseSensitive);
+    data.remove(QChar('>'), Qt::CaseSensitive);
+    data.remove(QChar('['), Qt::CaseSensitive);
+    data.remove(QChar(']'), Qt::CaseSensitive);
+    data.remove(QChar(' '), Qt::CaseSensitive);
+    data = std::string(data);
+    qDebug()<< "data: "<< data;
+    std::string dataStr = std::string(data);
+    std::regex reg(",");
+    std::sregex_token_iterator pos(mail.begin(), mail.end(), reg, -1);
+    decltype(pos) end;
+    for (; pos != end; ++pos)
+    {
+        std::cout << pos->str() << std::endl;
+    }
 
 }
