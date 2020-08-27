@@ -3,7 +3,10 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QPainter>
+#include <QColor>
 
+enum lineColor{white, black, red, blue, yellow, green, oringe, pink, purple};
 class myLabel : public QLabel
 {
     Q_OBJECT
@@ -11,10 +14,12 @@ public:
     explicit myLabel(QWidget *parent );
     virtual void paintEvent(QPaintEvent *event) override;
     void getPositionPredict();
+    QColor getColor(int);
 
 private:
     int pos[8][4];
     double pre[8][9];
+    int cot;
 };
 
 #endif // MYLABEL_H

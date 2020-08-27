@@ -76,6 +76,8 @@ void Widget::on_ReadyRead()
     readData = array;
     qDebug()<< "array: " << array;
 
+    update();
+
 //    ui->label_img->setText(QString(array));
 }
 void Widget::on_sendBut_clicked()
