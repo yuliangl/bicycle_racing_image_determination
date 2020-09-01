@@ -19,6 +19,8 @@ class Widget : public QWidget
 
 public:
     Widget(QWidget *parent = nullptr);
+    void getPositionPredict();
+    virtual void paintEvent(QPaintEvent *event) override;
     ~Widget();
 
 private slots:
@@ -27,6 +29,7 @@ private slots:
     void outError(QAbstractSocket::SocketError);
     void on_ReadyRead();
     void on_pathBut_clicked();
+    void setScaling();
 
     void on_connectBut_clicked();
 
@@ -37,6 +40,10 @@ private slots:
 private:
     Ui::Widget *ui;
     QTcpSocket *tcpSocket;
+    QPixmap img; // **** private members have not been initialization ****
+    QByteArray array;
+    double pos[8][4];
+    double pre[8][9];
 
 
 };

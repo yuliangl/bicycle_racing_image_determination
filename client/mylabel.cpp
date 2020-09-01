@@ -6,15 +6,18 @@
 
 #include "mylabel.h"
 
-extern QByteArray readData;
 myLabel::myLabel(QWidget *parent) : QLabel(parent), cot(0)
 {
+}
+
+void myLabel::paintrect(){
+    update();
 }
 void myLabel::paintEvent(QPaintEvent *event){
     QLabel::paintEvent(event);
 
     for(int i=0; i<8; i++){
-        getPositionPredict();
+//        getPositionPredict();
         QColor linecolor(getColor(i));
         int lineSize = 2;
 
@@ -23,13 +26,15 @@ void myLabel::paintEvent(QPaintEvent *event){
         pen.setColor(linecolor);
         pen.setWidth(lineSize);
         painter.setPen(pen);
+
         painter.drawRect(pos[i][0], pos[i][1], pos[i][2]-pos[i][0], pos[i][3]-pos[i][1]);
     }
-//    cot++;
-//    std::cout<< "cot: " << cot <<std::endl;
+    cot++;
+    std::cout<< "cot: " << cot <<std::endl;
 
 }
 
+/*
 void myLabel::getPositionPredict(){
     QString data(readData);
 //    qDebug()<< "data: "<< data;
@@ -68,6 +73,7 @@ void myLabel::getPositionPredict(){
 //        qDebug() << i <<"pre: " << tmp;
     }
 }
+*/
 
 QColor myLabel::getColor(int i){
     std::vector<double> predict;
@@ -75,7 +81,7 @@ QColor myLabel::getColor(int i){
         predict.push_back(pre[i][j]);
     }
     std::vector<double>::iterator max = std::max_element(predict.begin(), predict.end());
-//    std::cout<< "max" << *max <<std::endl;
+//    std::cout<< "max" << i << *max <<std::endl;
     int color = std::distance(predict.begin(), max);
 //    std::cout<< "color: " << color <<std::endl;
     switch (color) {
