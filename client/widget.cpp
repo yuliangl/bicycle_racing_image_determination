@@ -15,8 +15,6 @@ Widget::Widget(QWidget *parent)
 
 {
     ui->setupUi(this);
-//    pos[8][4] = {0};  //2-dimension array initailization
-//    pre[8][9] = {0};
     tcpSocket = new QTcpSocket;
     tcpSocket->setReadBufferSize(4096);
     connect(tcpSocket, SIGNAL(connected()), this, SLOT(on_connected()));
@@ -25,9 +23,19 @@ Widget::Widget(QWidget *parent)
     bool success = connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(on_ReadyRead()));
     qDebug() << "success is " << success;
 
-    connect(ui->label_img, SIGNAL(update()), this, SLOT(setScaling()));
     ui->label_status->setText("disconnected");
 
+
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<4; j++) {
+            pos[i][j] = 0;
+        }
+    }
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<9; j++) {
+            pre[i][j] = 0;
+        }
+    }
 }
 
 
@@ -38,7 +46,7 @@ void Widget::on_pathBut_clicked()
     ui->lineEdit_path->setText(file_name);
     ui->label_path->setText(file_name);
     if( img.load(file_name) ){
-        img.scaled(ui->label_img->size(), Qt::KeepAspectRatio);
+        img.scaled(ui->label_img->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         ui->label_img->setScaledContents(true);
         ui->label_img->setPixmap(img);
     }
@@ -160,7 +168,7 @@ void Widget::setScaling(){
         ui->label_img->pos[i][2] = (pos[i][2]/img_x)*label_x;
         ui->label_img->pos[i][3] = (pos[i][3]/img_y)*label_y;
         for (int j=0; j<4; j++){
-            qDebug() << i << ": "<<pos[i][j];
+//            qDebug() << i << ": "<<pos[i][j];
         }
     }
     for (int i=0; i<8; i++){

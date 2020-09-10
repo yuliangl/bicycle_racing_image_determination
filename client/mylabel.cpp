@@ -8,6 +8,16 @@
 
 myLabel::myLabel(QWidget *parent) : QLabel(parent), cot(0)
 {
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<4; j++) {
+            pos[i][j] = 0;
+        }
+    }
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<9; j++) {
+            pre[i][j] = 0;
+        }
+    }
 }
 
 void myLabel::paintrect(){
